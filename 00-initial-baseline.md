@@ -8,7 +8,7 @@ initial state to the hardened state.
 **Original test date:** 16 June 2026
 **Final review date:** 6 July 2026
 **Tester:** MHD Khalil Arabieh
-**Target:** https://khalilsec.no (GCP Compute Engine VM)
+**Target:** https://khalilsec.no (Local Compute Engine VM)
 
 ---
 
