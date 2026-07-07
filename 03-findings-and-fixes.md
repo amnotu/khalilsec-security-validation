@@ -26,8 +26,7 @@ and the checks used to confirm each fix.
 `X-SOC2-Audit`, and `X-ISMS-Audit`. These suggested formal regulatory or
 audit compliance.
 
-**Why it matters:** These are not standard security headers. The site had
-not gone through those audits. For a security portfolio, inaccurate audit
+**Why it matters:** These are not standard security headers. For a portfolio, unnecessary audit
 claims hurt trust.
 
 **Fix:** Removed all five headers from the Express middleware.
@@ -189,9 +188,3 @@ demo data with a clear `"status":"DEMO_FALLBACK"` label. The site did
 not present simulated data as real findings.
 
 ---
-
-## Final Status
-
-All documented issues are fixed. Follow-up work should focus on adding a
-`security.txt` disclosure contact and rerunning the full command-line test
-set after each deployment.
