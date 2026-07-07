@@ -137,15 +137,6 @@ Revisit this if session or auth features are added.
 
 ---
 
-### robots.txt and security.txt
-
-Both files fell through to the SPA shell during the original check.
-
-**Assessment:** This is not a vulnerability. Adding a `security.txt` file
-with a disclosure contact is still recommended for a security-focused site.
-
----
-
 ### HTTP/2 and HTTP/3
 
 **Command:**
@@ -155,14 +146,13 @@ curl -I --http2 https://khalilsec.no
 ```
 
 **Result:** HTTP/2 negotiated successfully. The server also advertised
-HTTP/3 through `alt-svc`. HTTP/3 was not independently tested because the
-local curl build did not support it.
+HTTP/3 through `alt-svc`. HTTP/3 was not independently tested.
 
 ---
 
 ## Reverse Proxy Configuration Review
 
-The Caddyfile for `khalilsec.no` was reviewed directly.
+The Caddyfile for `khalilsec.no` was reviewed directly. Under you can see part of it:
 
 ```caddyfile
 @dotfiles {
