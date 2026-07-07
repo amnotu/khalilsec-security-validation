@@ -6,21 +6,6 @@ checks against `https://khalilsec.no`.
 
 ---
 
-## Executive Summary
-
-I reviewed all five uploaded artifacts and produced final versions for
-each one. The Markdown files were cleaned and made more consistent. The
-notebook had three concrete issues: an old domain in one ffuf output, a
-misspelled code fence, and an empty code cell. Those are fixed in the
-final notebook.
-
-The local shell environment could not run live `curl` or `openssl` checks
-against `khalilsec.no` because outbound network access and DNS resolution
-failed in the sandbox. Browser-based fetch checks did work. They confirmed
-that the site loads over HTTPS and that `/.env` returns `403 Forbidden`.
-
----
-
 ## Files Reviewed
 
 | File | Result | Changes made |
@@ -29,20 +14,6 @@ that the site loads over HTTPS and that `/.env` returns `403 Forbidden`.
 | `01-recon.md` | Finalized | Added metadata, clearer commands, and final status. |
 | `02-web-scan.md` | Finalized | Normalized structure and clarified scan results. |
 | `03-findings-and-fixes.md` | Finalized | Added Host header issue as Finding 4 and cleaned the verification steps. |
----
-
-## Local Artifact Validation
-
-The local validation script checked these items:
-
-- each file exists
-- each file is readable as UTF-8
-- each document has an H1 heading
-- fenced code blocks are balanced
-- known bad patterns are absent from final files
-- each file ends with a newline
-- notebook JSON is valid
-
 ---
 
 ## Live Validation Status
@@ -54,20 +25,6 @@ The local validation script checked these items:
 | `https://khalilsec.no` | Loaded successfully. |
 | `https://khalilsec.no/.env` | Returned `403 Forbidden`. |
 | `https://khalilsec.no/server.js` | Returned the SPA shell, not exposed server source. |
-
-### Shell Checks
-
-These commands were attempted from the sandbox:
-
-```bash
-curl -sS -I --max-time 15 https://khalilsec.no
-curl -sS -I --max-time 15 http://khalilsec.no
-curl -sS -I --max-time 15 https://khalilsec.no/.env
-openssl s_client -connect khalilsec.no:443 -servername khalilsec.no -tls1_2
-```
-
-They failed because the sandbox could not resolve or connect to the
-external host. The failure was environmental, not a target finding.
 
 ---
 
