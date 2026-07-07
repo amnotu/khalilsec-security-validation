@@ -29,8 +29,6 @@ that the site loads over HTTPS and that `/.env` returns `403 Forbidden`.
 | `01-recon.md` | Finalized | Added metadata, clearer commands, and final status. |
 | `02-web-scan.md` | Finalized | Normalized structure and clarified scan results. |
 | `03-findings-and-fixes.md` | Finalized | Added Host header issue as Finding 4 and cleaned the verification steps. |
-| `Untitled.ipynb` | Finalized | Fixed old domain, fixed typo, replaced empty code cell with validation summary code. |
-
 ---
 
 ## Local Artifact Validation
