@@ -1,8 +1,6 @@
 # khalilsec.no Validation Report
 
 **Date:** 6 July 2026
-**Scope:** Uploaded Markdown files, uploaded Jupyter notebook, and safe
-checks against `https://khalilsec.no`.
 
 ---
 
