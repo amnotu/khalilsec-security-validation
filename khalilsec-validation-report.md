@@ -43,17 +43,6 @@ The local validation script checked these items:
 - each file ends with a newline
 - notebook JSON is valid
 
-### Issues Found in Uploaded Originals
-
-| Issue | File | Status |
-|---|---|---|
-| Old `work.gd` domain in ffuf output | `Untitled.ipynb` | Fixed |
-| Misspelled fence language `ymal` | `Untitled.ipynb` | Fixed |
-| Empty code cell | `Untitled.ipynb` | Fixed |
-| Host header fix missing from Markdown baseline | `00-initial-baseline.md` | Fixed |
-| Finding 4 missing from findings summary | `03-findings-and-fixes.md` | Fixed |
-| Missing final newlines | Markdown originals | Fixed |
-
 ---
 
 ## Live Validation Status
