@@ -88,9 +88,3 @@ external host. The failure was environmental, not a target finding.
 
 ---
 
-## Final Recommendation
-
-Use the final files in this folder as the clean report set. Then rerun
-`validate-khalilsec.sh` from your own terminal or VM where DNS and outbound
-HTTPS work. That will give you fresh raw header, method, CORS, TLS, and
-host-header evidence.
