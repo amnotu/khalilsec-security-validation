@@ -42,4 +42,8 @@
 | API validation | Not rerun by shell | Prior docs show malformed inputs rejected. |
 
 ---
+## Final note
 
+The documentation now separates three things that were previously close
+together: the original baseline, the hardening work, and the final validation
+state. That makes the case study easier to audit and easier to read.
