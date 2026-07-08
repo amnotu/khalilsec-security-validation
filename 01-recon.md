@@ -1,7 +1,7 @@
 # Recon & Fingerprinting
 
-**Target:** https://khalilsec.no
-**Original tools:** whatweb, curl
+**Target:** `https://khalilsec.no`  
+**Original tools:** whatweb, curl  
 **Final review date:** 6 July 2026
 
 ---
@@ -19,7 +19,7 @@ curl -sI https://khalilsec.no
 
 ### HTTP Security Headers — Strong
 
-The server returned a focused set of security headers:
+The server returned a focused headers set:
 
 - `Strict-Transport-Security` with `preload` and `includeSubDomains`
 - `Content-Security-Policy` scoped to `'self'`
@@ -28,17 +28,18 @@ The server returned a focused set of security headers:
 - `X-Content-Type-Options: nosniff`
 - CORS scoped to `https://khalilsec.no`, not `*`
 
-**Assessment:** The header set is suitable for this static portfolio site.
-The CSP avoids wildcard sources in the observed production policy.
+**Assessment:** The observed headers fit a static portfolio site. The CSP in
+production avoids wildcard sources.
 
 ---
 
-### Server Fingerprinting — Suppressed
+### Server fingerprinting
 
-`Server` and `X-Powered-By` are stripped at the reverse proxy layer.
+The `Server` and `X-Powered-By` headers are stripped at the reverse proxy
+layer.
 
 **Assessment:** This reduces passive information disclosure. It does not
-replace patching, but it avoids giving casual scanners extra detail.
+replace patching, but it gives casual scanners less deta
 
 ---
 
@@ -57,5 +58,5 @@ This was a credibility issue, not a technical vulnerability.
 ## Final Status
 
 Recon and fingerprinting results support the current hardening approach:
-minimal exposed metadata, scoped browser security headers, and no broad
+Low exposed metadata, scoped browser security headers, and no broad
 CORS policy.
