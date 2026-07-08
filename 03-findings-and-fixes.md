@@ -1,9 +1,9 @@
 # Findings & Fixes
 
-This document summarizes the issues found during testing, the fixes made,
-and the checks used to confirm each fix.
+This report lists the issues found during testing, the fixes applied, and the
+checks used to confirm each fix.
 
-**Target:** https://khalilsec.no
+**Target:** `https://khalilsec.no`  
 **Final review date:** 6 July 2026
 
 ---
@@ -26,8 +26,8 @@ and the checks used to confirm each fix.
 `X-SOC2-Audit`, and `X-ISMS-Audit`. These suggested formal regulatory or
 audit compliance.
 
-**Why it matters:** These are not standard security headers. For a portfolio, unnecessary audit
-claims hurt trust.
+**Why it matters:** These are not standard security headers. On a portfolio
+site, unsupported audit claims damage trust and can mislead readers.
 
 **Fix:** Removed all five headers from the Express middleware.
 
@@ -88,8 +88,9 @@ curl -sI -H 'Origin: https://evil.com' https://khalilsec.no | grep -i access-con
 curl -sI -H 'Origin: https://khalilsec.no' https://khalilsec.no | grep -i access-control-allow-origin
 ```
 
-**Expected result:** Both checks return `https://khalilsec.no`. The proxy
-policy stays fixed and does not reflect attacker-controlled origins.
+**Expected result:** Both checks return
+`Access-Control-Allow-Origin: https://khalilsec.no`. The proxy policy remains
+fixed and does not reflect attacker-controlled origins.
 
 **Status:** Fixed.
 
@@ -130,8 +131,10 @@ curl -sI -H 'Host: khalilsec.no' https://khalilsec.no/ | head -1
 
 ```bash
 for i in {1..35}; do
-  curl -s -o /dev/null -w "%{http_code}
-"     -X POST https://khalilsec.no/api/password-check     -H 'Content-Type: application/json'     -d '{"password":"test123"}'
+  curl -s -o /dev/null -w "%{http_code}\n" \
+    -X POST https://khalilsec.no/api/password-check \
+    -H 'Content-Type: application/json' \
+    -d '{"password":"test123"}'
 done
 ```
 
@@ -186,5 +189,4 @@ payloads tested.
 **Positive observation:** `/api/breach-check` and `/api/recon` returned
 demo data with a clear `"status":"DEMO_FALLBACK"` label. The site did
 not present simulated data as real findings.
-
 ---
