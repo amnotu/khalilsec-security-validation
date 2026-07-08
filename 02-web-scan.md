@@ -1,6 +1,6 @@
 # TLS & Application-Layer Scanning
 
-**Target:** https://khalilsec.no
+**Target:** `https://khalilsec.no`
 **Original tools:** sslscan, gobuster, nikto, curl
 **Final review date:** 6 July 2026
 
@@ -120,9 +120,8 @@ curl -sI -H 'Origin: https://evil.com' https://khalilsec.no
 curl -X OPTIONS -i https://khalilsec.no
 ```
 
-**Result:** `204 No Content`; allowed methods were limited to `GET`,
-`POST`, and `OPTIONS`. `CONNECT` and `TRACE` were explicitly blocked with
-`405 Method Not Allowed`.
+**Result:** The response returned `204 No Content`. `TRACE`, `CONNECT` and `OPTTIONS`
+were explicitly blocked with `405 Method Not Allowed`.
 
 **Assessment:** No unexpected write or tunnel methods were exposed.
 
@@ -177,13 +176,13 @@ handle @trace {
 }
 ```
 
-**Assessment:** The observed hardening is deliberate. Sensitive extension
-blocking, method denial, and server header stripping are all handled at
-the reverse proxy layer.
+**Assessment:** The hardening is intentional and enforced at the reverse
+proxy layer. Sensitive extension blocking, method denial, and server header
+stripping are handled before requests reach the application.
 
 ---
 
 ## Final Status
 
-No exploitable TLS, CORS, file exposure, or method tampering issue was
-confirmed after the hardening changes.
+After the hardening changes, testing did not confirm exploitable TLS, CORS,
+file exposure, or method tampering issues.
