@@ -41,6 +41,6 @@ The goal was to test the site like a small real-world target, document findings 
 
 This was performed only against infrastructure I own or control.
 
-The reports are written as a portfolio case study. They show testing method, risk judgment, fixes, and verification.
+The reports are written as a portfolio case study. They show testing method, risk judgment, fixes, and verification steps.
 
 This project is licensed under the MIT License.
