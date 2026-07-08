@@ -2,13 +2,13 @@
 
 This document records the first round of testing performed before the
 Caddy-layer hardening described in `02-web-scan.md` and
-`03-findings-and-fixes.md`. It is preserved to show the path from the
-initial state to the hardened state.
+`03-findings-and-fixes.md`. It's kept as a baseline so the later fixes can
+be compared with the original state.
 
 **Original test date:** 16 June 2026
 **Final review date:** 6 July 2026
 **Tester:** MHD Khalil Arabieh
-**Target:** https://khalilsec.no (Local Compute Engine VM)
+**Target:** https://khalilsec.no (On Local Compute Engine VM)
 
 ---
 
@@ -57,12 +57,12 @@ gobuster dir -u https://khalilsec.no -w /usr/share/dirb/wordlists/common.txt -x 
 ```
 
 **Finding:** Only `/assets/` was found during this baseline run. Other
-paths returned the SPA `index.html` shell, including probes for `.env`,
-`.git`, backup files, and similar paths.
+paths, including probes for `.env`, `.git`, backup files, and similar names,
+returned the single-page app `index.html` shell.
 
 At this point, the fallback behavior came from the SPA catch-all route.
-There was not yet an explicit Caddy block for sensitive extensions. This
-was later hardened with a `403 Forbidden` rule. See `02-web-scan.md`.
+There was no explicit Caddy rule for sensitive extensions yet. That was
+fixed later with a `403 Forbidden` rule, covered in `02-web-scan.md`.
 
 ---
 
@@ -105,9 +105,9 @@ HTTP/2 200
 ```
 
 **Finding at the time:** `TRACE` and `CONNECT` returned `200` instead of
-being denied. `TRACE` has historic relevance to Cross-Site Tracing. No
+being denied. `TRACE` has historic relevance to Cross-Site Tracing (XST). No
 practical exploit was found in this setup, but allowing these methods was
-unneeded attack surface.
+unnecessary attack surface.
 
 **Resolution:** Caddy handlers were added to return `405 Method Not
 Allowed` for both `TRACE` and `CONNECT`. See the HTTP method checks in
@@ -115,7 +115,7 @@ Allowed` for both `TRACE` and `CONNECT`. See the HTTP method checks in
 
 ---
 
-### 2.3 Sensitive File Exposure
+### 2.3 Sensitive File Exposure Checks
 
 **Commands:**
 
@@ -124,7 +124,7 @@ curl https://khalilsec.no/.env
 curl 'https://khalilsec.no/static/../server.js'
 ```
 
-**Output before fix:** Both returned the SPA `index.html` shell.
+**Output before fix:** Both requests returned the SPA `index.html` shell.
 
 **Finding at the time:** This was catch-all behavior, not proof that
 `.env` or `server.js` existed at those paths. The path traversal attempt
@@ -133,7 +133,7 @@ at the Caddy layer.
 
 ---
 
-### 2.4 Host Header Spoofing
+### 2.4 Host Header Spoofing before the fix
 
 **Original test commands:**
 
@@ -197,13 +197,13 @@ The valid host continues to return `200`. The issue is resolved.
 
 ## 3. Client-Side Input Handling
 
-### 3.1 Terminal Command Injection / XSS Test
+### 3.1 Terminal Command Injection And XSS Test
 
 The site includes an interactive terminal-style UI component. It accepts
 free-text commands and matches them against a fixed set of supported
 commands such as `help`, `about`, `skills`, and `cmatrix`.
 
-**Payloads entered in the terminal input:**
+**Payloads Example entered in the terminal input:**
 
 ```text
 alert("XSS")
