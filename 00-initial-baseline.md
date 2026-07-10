@@ -50,7 +50,7 @@ gobuster dir -u https://khalilsec.no -w /usr/share/dirb/wordlists/common.txt -x 
 gobuster dir -u https://khalilsec.no -w /usr/share/dirb/wordlists/common.txt -x php,asp,aspx,bak,old,txt,json,env,git,svn,swp,conf,yaml,yml -k --exclude-length 868 -t 50
 ```
 
-**Output:**
+**Output summary:**
 
 ```text
 /assets               (Status: 301) [Size: 156] [--> /assets/]
